@@ -1,16 +1,18 @@
 :root
 {
-  --pri: #0d7dc4;
-  --bg: 333;
-  --text: #000;
-  --border: #777;
-  --item_bg: #f4f8f9;
+  --pri: #0f97ed;
+  --bg: #222;
+  --text: #fff;
+  --border: #555;
+  --item_bg: #4c494c;
 }
 
 body
 {
   font-family: 'Titillium Web', sans-serif;
   margin-bottom: 300px;
+  color: var(--text);
+  background: var(--bg);
 }
 
 .navbar
@@ -19,6 +21,7 @@ body
   font-size: 28px;
   position: fixed;
   top: 0;
+  padding-right: 50px;
 }
 
 .navbar a
@@ -27,14 +30,16 @@ body
   float: right;
   display: inline-block;
   width: 80px;
-  height: 50px;
+  height: 65px;
   line-height: 50px;
+  text-align: center;
+  line-height:65px;
 }
 
 .navbar a:hover, .navbar a:active
 {
   text-decoration: none;
-  color: var(--pri);
+  background: var(--border);
 }
 
 .hexagon {
@@ -118,20 +123,22 @@ body
 
 .profile-img
 {
-  margin: auto;
+  margin-left: 30px;
   margin-top: 100px;
   margin-bottom: 100px;
+  display: inline-block;
 }
 
 .item
 {
   border: 2px solid var(--border);
-  width: 850px;
+  width: 1060px;
   height: auto;
   display: inline-block;
   margin: 15px auto;
   padding: 4px 2px;
   background: var(--item_bg);
+  display: none;
 }
 
 .item-desc
@@ -140,7 +147,7 @@ body
   text-align: left;
   position: relative;
   width: 340px;
-  height: 350px;
+  height: 442px;
   margin-left: 10px;
   font-size: 18px;
 }
@@ -150,9 +157,14 @@ body
   text-align: center;
 }
 
+.showcode
+{
+  width: 150px;
+}
+
 .item-showcase
 {
-  width: 486px;
+  width: 690px;
   display: inline-block;
   float: left;
 }
@@ -177,6 +189,7 @@ body
   padding: 0 0;
   margin: 0 1px;
   border: 3px solid var(--border);
+  position: relative;
 }
 
 .item-preview-list button:hover
@@ -192,24 +205,36 @@ body
 
 .item-preview img
 {
- width: 480px;
- height: 270px;
+ width: 650px;
+ height: 365px;
+}
+
+.play-btn
+{
+  position: absolute;
+}
+
+.item-con
+{
+  width: 1060px;
 }
 
 .btn
 {
   background: none;
-  border: 2px solid var(--pri);
+  border: 2px solid var(--border);
   border-radius: 0px !important;
+}
+
+.btn, .btn:active, .btn:hover
+{
+  color: var(--text) !important;
+  background: #302d2d;
 }
 
 .btn:hover
 {
-  margin-top: -1px;
-  margin-bottom: 1px;
-  margin-left: 1px;
-  margin-right: -1px;
-  box-shadow: -1px 1px 2px;
+  border-color: var(--pri);
 }
 
 .item-btn-con
@@ -232,6 +257,7 @@ body
   width: 100%;
   font-size: 20px;
   padding: 8px 12px;
+  margin-top: 4px;
   display: none;
   position: relative;
 }
@@ -247,4 +273,57 @@ body
   position: absolute;
   bottom: 10;
   right:10;
+}
+
+.skills
+{
+  font-size: 18px;
+  width: 700px;
+  display: inline-block;
+  float: right;
+  margin-top: 50px;
+}
+
+.left-skill
+{
+  width: 140px;
+}
+
+table
+{
+  margin-left: 20px;
+}
+
+#catagory
+{
+  position: relative;
+  z-index: 100;
+  width: 1060px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--pri);
+}
+
+#catagory button
+{
+  border: 0px;
+  margin-right: -2px;
+  margin-top: 18px;
+  font-size: 24px;
+  padding: 6px;
+  width: 180px;
+}
+
+#catagory button:hover
+{
+  background: var(--border);
+}
+
+#catagory.sticky {
+     position: fixed;
+     top: 0;
+}
+
+.active, #catagory button:active
+{
+  background-color: var(--pri) !important;
 }
