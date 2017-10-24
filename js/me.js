@@ -268,7 +268,7 @@ function addItem(type, id, title, videoID, date, bulletPts, extraInfo, codeText,
 
 function getVideoHtml(videoID)
 {
-  return '<iframe width="650" height="365" src="https://www.youtube.com/embed/'+videoID+'?rel=0&enablejsapi=1;showinfo=0"  frameborder="0" allowfullscreen></iframe>';
+  return '<iframe src="https://www.youtube.com/embed/'+videoID+'?rel=0&enablejsapi=1;showinfo=0"  frameborder="0" allowfullscreen></iframe>';
 }
 
 //toggle preview
