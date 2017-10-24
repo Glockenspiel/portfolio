@@ -21,25 +21,30 @@ body
   font-size: 28px;
   position: fixed;
   top: 0;
+  right: 0;
   padding-right: 50px;
+  border-bottom: 1px solid var(--border);
+  width: 300px;
+  z-index: 400;
 }
 
-.navbar a
+.navbar a, .navbar span
 {
   color: var(--text);
-  float: right;
+  float: left;
   display: inline-block;
   width: 80px;
-  height: 65px;
+  height: 60px;
   line-height: 50px;
   text-align: center;
-  line-height:65px;
+  line-height:60px;
 }
 
-.navbar a:hover, .navbar a:active
+.navbar a:hover, .navbar a:active, .navbar span:hover, .navbar span:active
 {
   text-decoration: none;
   background: var(--border);
+  cursor: pointer;
 }
 
 .hexagon {
@@ -278,10 +283,13 @@ body
 .skills
 {
   font-size: 18px;
-  width: 700px;
+  width: 900px;
   display: inline-block;
   float: right;
   margin-top: 50px;
+  display: none;
+  margin-left: -200px;
+  position: relative;
 }
 
 .left-skill
@@ -326,4 +334,118 @@ table
 .active, #catagory button:active
 {
   background-color: var(--pri) !important;
+}
+
+.item-preview-enlarge
+{
+  position: relative;
+  float:left;
+  margin-top: -35px;
+  margin-left: 618px;
+}
+
+.enlarge-modal
+{
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 350;
+  display: none;
+}
+
+.enlarge-con
+{
+  position: relative;
+  width: 70vw;
+  height: 70vh;
+  margin-left: -50%;
+  margin-top: 12vh;
+  background: var(--border);
+  border: 2px solid var(--border);
+  z-index: 300;
+}
+
+.enlarge-con img
+{
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.enlarge-con img.active
+{
+  display: block;
+}
+
+.modal-bg
+{
+  width: 100%;
+  height: 100%;
+  z-index: 120;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal-close
+{
+  position: fixed;
+  margin: -70vh;
+  margin-left: 70vh;
+  z-index: 130;
+}
+
+.modal-close button
+{
+  margin-left: -6px;
+  font-size: 18px;
+}
+
+.modal-arrows
+{
+  position: fixed;
+  font-size: 22px;
+  padding-top: 2px;
+  z-index: 150;
+  height: 60px;
+  width: 300px;
+  margin-left: -150px;
+  background: var(--bg);
+  border: 2px solid var(--pri);
+  text-align: center;
+}
+
+.modal-arrows button
+{
+  height: 50px;
+  width: 142px;
+  margin-top: 1px;
+}
+
+.email
+{
+  position: fixed;
+  right: 0;
+  top:60;
+  line-height: 40px;
+  height: 70px;
+  padding-top: 30px;
+  font-size: 18px;
+  padding-left: 10px;
+  width: 300px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  z-index: 101;
+  display: none;
+}
+
+.show-email.active
+{
+  background: red;
+}
+
+span.reverse {
+  unicode-bidi: bidi-override;
+  direction: rtl;
 }
