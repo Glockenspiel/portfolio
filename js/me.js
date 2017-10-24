@@ -16,14 +16,16 @@ $(document).on("click", ".showcode", function(){
   if($(preview).is(':hidden'))
   {
     $(preview).slideDown('300');
-    $(this).each(function(){
-      $(this).text("Hide More Info");
+    $(".showcode").each(function(){
+      if($(this).data("name")==name)
+        $(this).text("Hide More Info");
     });
   }
   else {
     $(preview).slideUp('300');
-    $(this).each(function(){
-      $(this).text("Show More Info");
+    $(".showcode").each(function(){
+      if($(this).data("name")==name)
+        $(this).text("Show More Info");
     });
   }
 });
@@ -45,7 +47,7 @@ $(document).ready(function() {
       setItemType();
     }
     else {
-      $("html, body").animate({ scrollTop: 0 }, "100", function(){
+      $("html, body").animate({ scrollTop: 0 }, 'fast', function(){
         setItemType();
       });
     }
@@ -87,14 +89,14 @@ function setItemType()
   });
 
   $(".show-email").click(function(){
-    if($(this).hasClass('active'))
+    if($(".email").is(":hidden"))
     {
-      $(this).removeClass('active');
-      $(".email").hide();
+      $(this).addClass("active");
+      $(".email").show();
     }
     else {
-      $(".email").show();
-      $(this).addClass('active');
+      $(".email").hide();
+      $(this).removeClass("active");
     }
   });
 }
@@ -181,7 +183,7 @@ function addItem(type, id, title, videoID, date, bulletPts, extraInfo, codeText,
       '<div class="item-preview-list">';
         if(videoID!=null)
         {
-          var imgSrc= 'http://img.youtube.com/vi/'+videoID+'/maxresdefault.jpg';
+          var imgSrc= 'http://img.youtube.com/vi/'+videoID+'/default.jpg';
           html+='<button data-name="'+id+'" data-videoid="'+videoID+'"><div class="play-btn"><img src="/res/img/play-btn.png"/></div><img src="'+imgSrc+'"/></button>';
         }
 
@@ -375,16 +377,10 @@ $(document).scroll(function() {
  {
    if(lock)
    {
-     $('html, body').css({
-          overflow: 'hidden',
-          height: '100%'
-      });
+     disableScroll();
    }
    else {
-     $('html, body').css({
-        overflow: 'auto',
-        height: 'auto'
-      });
+     enableScroll();
    }
  }
 
@@ -432,3 +428,37 @@ $(document).scroll(function() {
       }
     });
  });
+
+ var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+function enableScroll() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
+}
