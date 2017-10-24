@@ -51,12 +51,16 @@ $(document).ready(function() {
         setItemType();
       });
     }
+
+    jQuery("iframe").each(function() {
+      jQuery(this)[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      console.log("pausing");
+    });
   });
 
   $(".skills").fadeIn(100, function() {
-    $(".skills").animate({left: '+=200'}, 400);
+    $(".skills").animate({left: '+=100'}, 400);
   });
-
 });
 
 //sets item type depending on the current href
@@ -265,7 +269,7 @@ function addItem(type, id, title, videoID, date, bulletPts, extraInfo, codeText,
 
 function getVideoHtml(videoID)
 {
-  return '<iframe width="650" height="365" src="https://www.youtube.com/embed/'+videoID+'?rel=0&amp;showinfo=0"  frameborder="0" allowfullscreen></iframe>';
+  return '<iframe width="650" height="365" src="https://www.youtube.com/embed/'+videoID+'?rel=0&enablejsapi=1;showinfo=0"  frameborder="0" allowfullscreen></iframe>';
 }
 
 //toggle preview

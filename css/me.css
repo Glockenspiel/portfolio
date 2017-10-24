@@ -4,7 +4,8 @@
   --bg: #222;
   --text: #fff;
   --border: #555;
-  --item_bg: #4c494c;
+  --item_bg: #424042;
+  --bg_faded: rgba(34,34,34,0.78);
 }
 
 html{
@@ -14,9 +15,10 @@ html{
 body
 {
   font-family: 'Titillium Web', sans-serif;
-  margin-bottom: 300px;
+  padding-bottom: 300px;
   color: var(--text);
   background: var(--bg);
+  background: url(/res/img/bg.jpg) no-repeat center center fixed;
 }
 
 .navbar
@@ -30,9 +32,11 @@ body
   border-bottom: 1px solid var(--border);
   width: 300px;
   z-index: 400;
+  background: black;
 }
 
-.navbar a, .navbar span
+
+.navbar a, .show-email
 {
   color: var(--text);
   float: left;
@@ -44,7 +48,7 @@ body
   line-height:60px;
 }
 
-.navbar a:hover, .navbar a:active, .navbar span:hover, .navbar span:active
+.navbar a:hover, .navbar a:active, .show-email:hover, .show-email:active
 {
   text-decoration: none;
   background: var(--border);
@@ -126,8 +130,15 @@ body
 
 .content
 {
-  width: 980px;
+  width: 1080px;
   margin: auto;
+  background: var(--bg_faded);
+  padding-bottom: 1px;
+}
+
+.top-content
+{
+  background: var(--bg);
 }
 
 .profile-img
@@ -144,7 +155,7 @@ body
   width: 1060px;
   height: auto;
   display: inline-block;
-  margin: 15px auto;
+  margin: 10px auto;
   padding: 4px 2px;
   background: var(--item_bg);
   display: none;
@@ -244,6 +255,7 @@ video
 .item-con
 {
   width: 1060px;
+  margin: auto;
 }
 
 .btn
@@ -310,7 +322,7 @@ video
   float: right;
   margin-top: 50px;
   display: none;
-  margin-left: -200px;
+  margin-left: -300px;
   position: relative;
 }
 
@@ -328,7 +340,7 @@ table
 {
   position: relative;
   z-index: 100;
-  width: 1060px;
+  width: 1080px;
   background: var(--bg);
   border-bottom: 1px solid var(--pri);
 }
@@ -465,12 +477,13 @@ table
   font-size: 18px;
   padding-left: 10px;
   width: 300px;
-  background: var(--bg);
+  background: black;
   border-bottom: 1px solid var(--border);
   text-align: left;
   z-index: 101;
   display: none;
 }
+
 
 .show-email.active
 {
