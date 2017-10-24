@@ -100,9 +100,9 @@ function setItemType()
 }
 
 var screenshots = [
-  ["rapidless", "screen_1.png", "screen_2.png", "screen_3.png"],
+  ["rapidless", "screen_1.jpg", "screen_2.jpg", "screen_3.jpg"],
   ["phantom", "screen_1.jpg", "screen_4.jpg", "screen_3.jpg", "screen_2.jpg"],
-  ["mjj", "screen_2.gif", "screen_3.jpg", "screen_4.jpg"],
+  ["mjj", "generation.mp4", "screen_3.jpg", "screen_1.jpg"],
   ["java-game", "screen_1.jpg"],
   ["cdf", "screen_0.jpg","screen_1.jpg","screen_2.jpg", "screen_3.jpg"],
   ["fiber", "screen_2.jpg", "screen_1.jpg"],
@@ -143,7 +143,7 @@ function addAllItems()
   var javaInfo = ["Entity Component System", "Sprites and Animations", "Multichannel Audio",
   "Collision Detection", "Quad Trees", "Multithreading", "Tile Maps", "Saving and Loading"];
   var javaCodeText = "Code to initalize level:";
-  addItem("games", "java-game", "Java Game Library", null, "Dec 2015", ["screen_1.jpg"], javaInfo, null, javaCodeText, "https://github.com/Glockenspiel/Java-Game-Engine");
+  addItem("games", "java-game", "Java Game Library", null, "Dec 2015", javaInfo, null, javaCodeText, "https://github.com/Glockenspiel/Java-Game-Engine");
 
   var cdfInfo = ["Website", "HTML, CSS, JavaScript, JQuery", "Blog and infographics",
   "Infographic tool generates html from templates and input fields", "Custom blogging tool", "Meta tag generation for new posts", "Table generation from csv strings", "Comment section with Disqus"];
@@ -152,7 +152,7 @@ function addAllItems()
   var fiberInfo = ["Alternative implementation of coroutines",
   "Single application uses worker threads and schedules tasks onto allocated memory called fibers",
   "C++11", "Task scheduling", "Concurrent atomic data structures", "Multi-threading"];
-  addItem("software", "fiber", "Fiber Library", null, "Apr 2016", fiberInfo, null,null,"https://github.com/Glockenspiel/Fibers4U");
+  addItem("software", "fiber", "Fiber Library", null, "Apr 2016", fiberInfo, null,"Example of binding and scheduling multiple tasks:","https://github.com/Glockenspiel/Fibers4U");
 
   var uniInfo = ["University of Limerick", "Object Orientated Programming", "Software Design Patterns and Architecture", "SQL Database Queries and Design", "Multi-threaded Programming",
   "Event Driven Programming", "Software Testing", "Android Development", "Artificial Intelligence and Machine Learning"];
@@ -190,7 +190,17 @@ function addItem(type, id, title, videoID, date, bulletPts, extraInfo, codeText,
           if(imgs[i]!=null)
           {
             var imgSrc= '/res/img/'+id+'/'+imgs[i];
-            html+='<button data-name="'+id+'" data-src="'+imgSrc+'"><img src="'+imgSrc+'"/></button>';
+            if(imgs[i].indexOf(".mp4")!=-1)
+            {
+              html+= '<button data-name="'+id+'" data-src="'+imgSrc+'">'+
+                      '<video autoplay loop>'+
+                        '<source src="'+imgSrc+'" type="video/mp4" />'+
+                        'Your browser does not support the video tag.'+
+                      '</video></button>';
+            }
+            else {
+              html+='<button data-name="'+id+'" data-src="'+imgSrc+'"><img src="'+imgSrc+'"/></button>';
+            }
           }
         }
       html+=
@@ -277,7 +287,14 @@ $(document).on("click", ".item-preview-list button", function(){
       toggleEnlargeVisiblity(name, false);
     }
     else {
-      $(preview).html('<img src="'+imgSrc+'" class="item-preview-img" data-name="'+name+'"/>');
+      if(imgSrc.indexOf(".mp4")==-1)
+      {
+        $(preview).html('<img src="'+imgSrc+'" class="item-preview-img" data-name="'+name+'"/>');
+      }
+      else {
+        var html = '<video autoplay loop><source src="'+imgSrc+'" type="video/mp4" class="item-preview-img" data-name="'+name+'"/>Your browser does not support the video tag.</video>';
+        $(preview).html(html);
+      }
       toggleEnlargeVisiblity(name, true);
     }
 });
@@ -312,7 +329,13 @@ $(document).scroll(function() {
    {
      var name = $(this).data("name");
      var imgs = getScreenShots(name);
-     var imgName = $(getElementByName(".item-preview-img", name)).attr("src").split("/").pop();
+
+     var element = getElementByName(".item-preview-img", name);
+     var imgName;
+
+
+      imgName = $(element).attr("src").split("/").pop();
+
 
      var startingIndex = imgs.indexOf(imgName);
      currentEnlargeIndex = startingIndex;
@@ -321,10 +344,20 @@ $(document).scroll(function() {
      var html = '';
      for(var i=0; i<imgs.length; i++)
      {
-      var cls='';
-      if(i==startingIndex)
-        cls = "active";
-      html+='<img src="res/img/'+name+'/'+imgs[i]+'" data-index="'+i+'" class="'+cls+'"/>';
+        var cls='englarged-item';
+        if(i==startingIndex)
+          cls += ' active';
+
+        var imgSrc= 'res/img/'+name+'/'+imgs[i];
+
+        //gif video
+        if(imgs[i].indexOf(".mp4")!=-1)
+        {
+          html += '<video autoplay loop data-index="'+i+'" class="'+cls+'"><source src="'+imgSrc+'" type="video/mp4"/>Your browser does not support the video tag.</video>';
+        }
+        else{
+          html+='<img src="'+imgSrc+'" data-index="'+i+'" class="'+cls+'"/>';
+        }
       }
 
      $(".enlarge-con").html(html);
@@ -389,9 +422,9 @@ $(document).scroll(function() {
     else if(currentEnlargeIndex > enlargeMaxIndex)
       currentEnlargeIndex = 0;
 
-    $(".enlarge-con img.active").removeClass('active');
+    $(".englarged-item.active").removeClass('active');
 
-    $(".enlarge-con img").each(function(){
+    $(".englarged-item").each(function(){
       if($(this).data("index") == currentEnlargeIndex)
       {
         $(this).addClass('active');

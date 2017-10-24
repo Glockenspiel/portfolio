@@ -7,6 +7,10 @@
   --item_bg: #4c494c;
 }
 
+html{
+  background: var(--bg);
+}
+
 body
 {
   font-family: 'Titillium Web', sans-serif;
@@ -174,17 +178,33 @@ body
   float: left;
 }
 
+.item-showcase video
+{
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+}
+
 .item-preview
 {
   display: inline-block;
   float: left;
+  width: 654px;
+  height: 369px;
   margin: 4px 3px;
   border: 2px solid var(--border);
+  background: var(--bg);
 }
 
 .item-preview-list
 {
   margin-left: 3px;
+}
+
+video
+{
+  width: auto;
+  height: auto;
 }
 
 .item-preview-list button
@@ -195,6 +215,8 @@ body
   margin: 0 1px;
   border: 3px solid var(--border);
   position: relative;
+  float: left;
+  background: var(--bg);
 }
 
 .item-preview-list button:hover
@@ -202,7 +224,7 @@ body
   border-color: var(--pri);
 }
 
-.item-preview-list img
+.item-preview-list img, .item-preview-list video
 {
   width: 100%;
   height: 100%;
@@ -365,16 +387,17 @@ table
   z-index: 300;
 }
 
-.enlarge-con img
+.enlarge-con img, .enlarge-con video
 {
   display: none;
   width: 100%;
   height: 100%;
 }
 
-.enlarge-con img.active
+.enlarge-con img.active, .enlarge-con video.active
 {
   display: block;
+  background: var(--bg) !important;
 }
 
 .modal-bg
@@ -390,15 +413,24 @@ table
 .modal-close
 {
   position: fixed;
-  margin: -70vh;
-  margin-left: 70vh;
-  z-index: 130;
+  right: 0;
+  margin-right: 15vw;
+  top: 10vh;
+  z-index: 360;
+  width: 50px;
+  height: 40px;
+  text-align: right;
 }
 
 .modal-close button
 {
-  margin-left: -6px;
   font-size: 18px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  line-height: 22px;
+  margin-right: -54px;
+  margin-top: 19px;
 }
 
 .modal-arrows
