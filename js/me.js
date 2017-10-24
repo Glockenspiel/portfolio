@@ -54,7 +54,6 @@ $(document).ready(function() {
 
     jQuery("iframe").each(function() {
       jQuery(this)[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-      console.log("pausing");
     });
   });
 
@@ -138,7 +137,7 @@ function addAllItems()
   var rapidInfo = ["3 day game jam", "Car physics", "Arcade style physics", "Unity C#", "AI"];
   addItem("games", "rapidless", "Rapidless", "6dPV2LQNfWI", "Jul 2017", rapidInfo, null, null);
 
-  var phantomInfo = ["Dota 2 mod", "Lua", "Multiplayer PvP", "Paricle effects"];
+  var phantomInfo = ["Dota 2 mod", "Lua", "Multiplayer PvP", "Paricle effects", "Custom map"];
   addItem("games", "phantom", "Phantom Palace", "iVH01jBOEB0", "Oct 2016", phantomInfo, null, null);
 
   var mjjInfo = ["Unity C#", "Randomly generated maps", "Use of coroutines", "7 day game jam"];
