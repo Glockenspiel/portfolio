@@ -130,16 +130,14 @@ function getScreenShots(name)
 function addAllItems()
 {
   var rapidInfo = ["3 day game jam", "Car physics", "Arcade style physics", "Unity C#", "AI"];
-
-  addItem("games", "rapidless", "Rapidless", "6dPV2LQNfWI", "Jul 2017", ["screen_1.png", "screen_2.png", "screen_3.png"], rapidInfo, null, null);
+  addItem("games", "rapidless", "Rapidless", "6dPV2LQNfWI", "Jul 2017", rapidInfo, null, null);
 
   var phantomInfo = ["Dota 2 mod", "Lua", "Multiplayer PvP", "Paricle effects"];
-  addItem("games", "phantom", "Phantom Palace", "iVH01jBOEB0", "Oct 2016", ["screen_1.jpg", "screen_4.jpg", "screen_3.jpg", "screen_2.jpg"], phantomInfo, null, null);
+  addItem("games", "phantom", "Phantom Palace", "iVH01jBOEB0", "Oct 2016", phantomInfo, null, null);
 
   var mjjInfo = ["Unity C#", "Randomly generated maps", "Use of coroutines", "7 day game jam"];
-  var mjjImgs = ["screen_2.gif", "screen_3.jpg", "screen_4.jpg"];
   var mjjCodeText = "Arrow traps used coroutines for their animation:";
-  addItem("games", "mjj", "Mythical Jetpack Journey", "aLekW5fLcHY", "Mar 2016", mjjImgs, mjjInfo, null, mjjCodeText);
+  addItem("games", "mjj", "Mythical Jetpack Journey", "aLekW5fLcHY", "Mar 2016", mjjInfo, null, mjjCodeText);
 
 
   var javaInfo = ["Entity Component System", "Sprites and Animations", "Multichannel Audio",
@@ -149,22 +147,24 @@ function addAllItems()
 
   var cdfInfo = ["Website", "HTML, CSS, JavaScript, JQuery", "Blog and infographics",
   "Infographic tool generates html from templates and input fields", "Custom blogging tool", "Meta tag generation for new posts", "Table generation from csv strings", "Comment section with Disqus"];
-  addItem("software", "cdf", "CoolDownFeed.com", "yICAr1zacbk", "Oct 2017", ["screen_0.jpg","screen_1.jpg","screen_2.jpg", "screen_3.jpg"], cdfInfo, null, null, "http://www.cooldownfeed.com");
+  addItem("software", "cdf", "CoolDownFeed.com", "yICAr1zacbk", "Oct 2017",  cdfInfo, null, null, "http://www.cooldownfeed.com");
 
   var fiberInfo = ["Alternative implementation of coroutines",
   "Single application uses worker threads and schedules tasks onto allocated memory called fibers",
   "C++11", "Task scheduling", "Concurrent atomic data structures", "Multi-threading"];
-  addItem("software", "fiber", "Fiber Library", null, "Apr 2016", ["screen_2.jpg", "screen_1.jpg"],fiberInfo, null,null,"https://github.com/Glockenspiel/Fibers4U");
+  addItem("software", "fiber", "Fiber Library", null, "Apr 2016", fiberInfo, null,null,"https://github.com/Glockenspiel/Fibers4U");
 
   var uniInfo = ["University of Limerick", "Object Orientated Programming", "Software Design Patterns and Architecture", "SQL Database Queries and Design", "Multi-threaded Programming",
   "Event Driven Programming", "Software Testing", "Android Development", "Artificial Intelligence and Machine Learning"];
-  addItem("edu", "uni", "B.Sc in Computer Games Development", null, "Aug 2016", ["screen_1.jpg"], uniInfo, null, null, null);
+  addItem("edu", "uni", "B.Sc in Computer Games Development", null, "Aug 2016", uniInfo, null, null, null);
 
 }
 
 //adds an item to the page
-function addItem(type, id, title, videoID, date, imgs, bulletPts, extraInfo, codeText, url)
+function addItem(type, id, title, videoID, date, bulletPts, extraInfo, codeText, url)
 {
+  var imgs = getScreenShots(id);
+
   var html =
   '<div class="item" data-type="'+type+'">'+
     '<div class="item-showcase">'+
