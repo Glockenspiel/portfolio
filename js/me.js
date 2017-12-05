@@ -37,7 +37,7 @@ $(document).ready(function() {
   setItemType();
 
   //navigate catagories
-  $("#catagory button").click(function(){
+  $(".opt").click(function(){
     var type = $(this).data("type");
     document.location.href = "#"+type;
 

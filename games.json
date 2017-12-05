@@ -1,0 +1,124 @@
+{
+  "games": [
+      {
+        "id":     "sumo_ninja",
+        "date":   "Apr 2013",
+        "desc":   "Endless survival, wave by wave",
+        "tools":  "C# XNA",
+        "video":  "",
+        "other" : "Awful code and very bugged, made for college project near the end of my first year"
+      },
+      {
+        "id":     "blue_bloke_turbo",
+        "date":   "Dec 2013",
+        "desc":   "Platformer with 20 levels, 4 stages and achievements.",
+        "tools" : "C# XNA",
+        "video" : "https://youtu.be/ikwmpn-2jDk",
+        "other":  "First release, sold on desura for €5 with 2 reviews"
+      },
+      {
+        "id":     "asteroid_bust",
+        "date":   "Dec 2013",
+        "desc":   "Space shooter with Unity physics",
+        "tools":  "C# Unity",
+        "video" : "",
+        "other":  "Origionally made for Ludum Dare 28 game jam in 48hrs. A lot of Players couldn't play the game because of XNA. I later remade the game with Unity"
+      },
+      {
+        "id":     "candy_catcher",
+        "date":   "Jan 2014",
+        "desc":   "Catch the candy flying past",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  "Very simple game"
+      },
+      {
+        "id":     "flappy_bantam",
+        "date":   "Feb 2014",
+        "desc":   "Flappy Bird clone",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  ""
+      },
+      {
+        "id":     "the_music_box",
+        "date":   "Apr 2014",
+        "desc":   "Hexagon Voxel Horror",
+        "tools" : "C# Unity",
+        "video" : "https://www.youtube.com/watch?v=7g99ktToRsc",
+        "other":  "Technically difficult and focused on building an atmosphere with audio"
+      },
+      {
+        "id":     "lavander_village",
+        "date":   "May 2014",
+        "desc":   "Skyrim Mod made with 2 other students",
+        "tools" : "skyrim modding tools",
+        "video" : "https://www.youtube.com/watch?v=9r-Q4daCRfk",
+        "other":  "Originally we had 4 members but one guy dropped out of college. The project consisted mostly of game and level design and a very small amount of scripting. It had puzzles, loot, fights and NPC dialogue. There was no api so we hacked together code from existing scripts"
+      },
+      {
+        "id":     "hungry_archer",
+        "date":   "Mar 2014",
+        "desc":   "Shoot the pigs to get bacon, if you don't have bacon you will die from hunger",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  "Made for a 48hr game jam, but I ran out of time because I had difficulty understand how to transform mouse coordinates to world coordinates. It had some simple ai and very loud audio."
+      },
+      {
+        "id":     "block_wars",
+        "date":   "Sep 2016",
+        "desc":   "Use your abilities to survive as long as possible",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  "48hr Game jam game, used to prototype moba type abilities: dash, fire projectile and and AoE"
+      },
+      {
+        "id":     "mythical_jetpack_journey",
+        "date":   "Mar 2016",
+        "desc":   "Randomly generated rooms, get to the end and manage the resource of energy. With a boss fight at the end.",
+        "tools" : "C# Unity, Blender",
+        "video" : "https://youtu.be/aLekW5fLcHY",
+        "other":  "Use of coroutines to animate traps. This was the first time I coded a boss fight all of the game was made in 1 week."
+      },
+      {
+        "id":     "cyborg_lion",
+        "date":   "Mar 2016",
+        "desc":   "Auto runner game like Robot Unicorn Attack where but you have get to the end of the level",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  "You can bouncing off walls, power boosting and swinging"
+      },
+      {
+        "id":     "warping_ninja",
+        "date":   "Apr 2016",
+        "desc":   "Make a shadow copy of yourself and solve the action based puzzles",
+        "tools" : "C# Unity",
+        "video" : "",
+        "other":  "Made in 48hrs for Galway game jam. The show copy records the player's position and creates a second version of the player which plays the same animations"
+      },
+      {
+        "id":     "phantom_palace",
+        "date":   "Sep 2016",
+        "desc":   "Multiplayer PvP Dota 2 mod where one player plays a strong character and the rest try to kill them.",
+        "tools" : "Lua, KV pairs, Dota 2 Tools",
+        "video" : "https://www.youtube.com/watch?v=iVH01jBOEB0",
+        "other":  "I learned how to do fancy particle effects and made a polished custom map. Very poorly balanced and the modding API was very buggy. 4800+ ratings with 72% positive."
+      },
+      {
+        "id":     "rapidless",
+        "date":   "Jul 2017",
+        "desc":   "Arcade racing game",
+        "tools" : "C# Unity",
+        "video" : "https://youtu.be/6dPV2LQNfWI",
+        "other":  "Arcade physics build on top of the Unity rigidbody. There is 3 laps and ai slow down and speed up depending on your placement in the race. The gameplay ended up being a little bit too difficult. This game was made in 4 days."
+      },
+      {
+        "id":     "payload",
+        "date":   "Nov 2017",
+        "desc":   "Payload as A Dota 2 mod",
+        "tools":  "Source 2 modding with lua",
+        "video":  "https://youtu.be/FztJDS6z_Wg",
+        "other":  "Made for the frostivus custom game contest. 5/5 stars on the workshop"
+      }
+    ]
+}
