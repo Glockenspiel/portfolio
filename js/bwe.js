@@ -17,7 +17,8 @@ class bwe{
 
     if(kv["data"] != undefined){
       for(var key in kv["data"]){
-        res += " data-" + key + "= '" + kv["data"][key] + "'";
+        var str = ' data-' + kv["data"][key][0] + '="' + kv["data"][key][1] + '"';
+        res += str;
       }
     }
 

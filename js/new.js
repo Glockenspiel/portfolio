@@ -1,11 +1,19 @@
 window.onload = function(){
   genProfile();
   genNav();
+
+  //add container
   bwe.append("body", {
     tag : "div",
     class : "container"
   });
 
+  //loads the catagory depending on the url hash
+  changePage(getPageID());
+}
+
+//returns the id of the current hash catagory
+function getPageID(){
   var id = "game";
   var curPage = window.location.href.split("/").pop();
   for(var i in pages){
@@ -14,13 +22,18 @@ window.onload = function(){
       break;
     }
   }
-  changePage(id);
+  return id;
 }
 
 //changing page event
 $(document).on("click", ".catagory", function(){
   changePage($(this).attr("id").replace("cat-", ""));
 });
+
+//media list item click event
+$(document).on("click", ".media-item", function(){
+  changePreview(this, $(this).data("parent"), $(this).data("media"), $(this).data("type"))
+})
 
 var pages = [
   {
@@ -39,8 +52,6 @@ var pages = [
 
 //generates the navbar html
 function genNav(){
-
-
   var items = {
     tag : "div",
     class : "nav-items"
@@ -105,7 +116,6 @@ function genProfile(){
 //returns the string of active for building json on load
 function getActiveNav(page){
   var curPage = window.location.href.split("/").pop();
-  console.log("page:" + page + "," + curPage);
   if(curPage === page || (page==="#game" && curPage=="")){
     return " active";
   }
@@ -172,6 +182,7 @@ function changePage(id){
 function genMedia(data){
   var media = [];
   var list = [];
+  var hasVideo = 0;
   var preview = {
     tag : "div",
     class : "item-preview",
@@ -184,7 +195,7 @@ function genMedia(data){
     ]
   }
   if(data["videoID"] !== ""){
-    //<iframe src="https://www.youtube.com/embed/6dPV2LQNfWI?rel=0&amp;enablejsapi=1;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+    hasVideo=1;
     preview["children"] = [
       {
         tag : "iframe",
@@ -194,13 +205,16 @@ function genMedia(data){
       }
     ];
     var videoThumbnail = "http://img.youtube.com/vi/"+data["videoID"]+"/default.jpg";
-    list.push(genMediaListItem(videoThumbnail, data["id"], true));
+    list.push(genMediaListItem(videoThumbnail, data["id"], 0, true));
   }
 
 
 
   for(var i in data["imgs"]){
-    var mediaItem = genMediaListItem(data["imgs"][i], data["id"]);
+    var mediaItem = genMediaListItem(data["imgs"][i], data["id"], i+hasVideo);
+    if(data["videoID"] === "" && i==0){
+      bwe.appendAttr(mediaItem, "class", "active");
+    }
     list.push(mediaItem);
   }
 
@@ -215,33 +229,71 @@ function genMedia(data){
 }
 
 //generates the json for the media list items
-function genMediaListItem(img, id, isVideo){
+function genMediaListItem(img, id, ind, isVideo){
   if(isVideo == undefined || !isVideo){ //image
     return {
       tag : "div",
-      class : "media-item row",
+      class : "media-item row media-" + id,
       children : [
         {
           tag : "img",
           src : "/res/img/"+id+"/"+img
         }
+      ],
+      data : [
+        ["parent", id],
+        ["media", img],
+        ["type", "img"]
       ]
     }
   }
   else{ //video
+    var thumnailData = img.split("/");
+    var vid = thumnailData[thumnailData.length-2];
     return {
       tag : "div",
-      class : "media-item row",
+      class : "media-item row active media-" + id,
       children : [
         {
           tag : "img",
           src : img
         }
+      ],
+      data : [
+        ["parent", id],
+        ["media", vid],
+        ["type", "youtube"]
       ]
     }
   }
 }
 
+//toggles the preview image on an item
+function changePreview(sel, parent, media, type){
+  if($(sel).hasClass('active') ==false){
+      $(".media-"+parent+".active").removeClass('active');
+      $(sel).addClass('active');
+      if(type==="img"){
+        $("#preview-"+parent).html(
+          bwe.build({
+          tag : "img",
+          src : "/res/img/" + parent + "/" + media
+        }));
+      }
+      else if(type==="youtube"){
+        $("#preview-"+parent).html(
+          bwe.build({
+            tag : "iframe",
+            src : "https://www.youtube.com/embed/" + media + "?rel=0&amp;enablejsapi=1;showinfo=0",
+            frameborder : "0",
+            allowfullscreen : ""
+          })
+        );
+      }
+  }
+}
+
+//data for the page
 var pageData = [
   {
     type : "game",
