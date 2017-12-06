@@ -1,14 +1,19 @@
 :root{
-  --bg : #eee;
+  --bg : #fafafa;
   --page_bg : #fff;
   --hover : #aaa;
   --text : #000;
   --pri : #7cccff;
+  --border : #ccc;
+  --bg_alt : #eee;
+  --pri_alt : #0375be;
+  --shadow : #aaa;
 }
 
 html{
   font-family: 'Barlow', sans-serif;
   color: var(--text);
+  font-size: 16px;
 }
 
 nav{
@@ -20,6 +25,12 @@ nav{
   border-bottom: 1px solid var(--pri);
 }
 
+iframe{
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 
 .nav-items a:hover{
   background: var(--hover);
@@ -28,7 +39,7 @@ nav{
   display: inline-block;
   margin-right: -4px;
   width: 140px;
-  height: 49px;
+  height: 50px;
   text-decoration: none;
   text-align: center;
   line-height: 50px;
@@ -47,7 +58,8 @@ a{
 .profile{
   height: 220px;
   width: 1070px;
-  margin: 0 auto;
+  margin: 30px auto;
+  margin-bottom: 60px;
 }
 
 .profile-img, .profile-info{
@@ -60,8 +72,10 @@ h1{
 }
 
 .profile-info{
-  vertical-align: middle;
+  vertical-align: top;
   padding-left: 70px;
+  padding-top: 15px;
+  height: 100%;
 }
 
 .profile-info table{
@@ -76,4 +90,95 @@ h1{
 .profile-img img{
   height: 220px;
   width: 220px;
+}
+
+.container{
+  margin: 0 auto;
+  width: 1070px;
+  min-height: 500px;
+  padding: 0;
+  margin-bottom: 400px;
+}
+
+.item{
+  margin: 8px 0px;
+  width: 100%;
+  height: 473px;
+  background :  var(--bg);
+  box-shadow: 0px 0px 12px var(--shadow);
+}
+
+.item-media{
+  width: 700px;
+  height: 100%;
+}
+
+.row{
+  display: inline-block;
+  margin-right: -4px;
+  vertical-align: top;
+}
+
+.item-info{
+  width: 324px;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: 0px 20px;
+  clear: left;
+  border-left: 4px solid var(--border);
+  border-right: 4px solid var(--border);
+}
+
+.item-info ul{
+  text-align: left;
+}
+
+.item-preview{
+  height: 390px;
+}
+
+.item-preview img{
+  height: 390px;
+  width: 100%;
+}
+
+.media-list{
+  height: 83px;
+  width: 700px;
+  background: var(--bg_alt);
+}
+
+.media-item{
+  height: 78px;
+  width: 139px;
+  border-bottom: 3px solid var(--border);
+  cursor: pointer;
+  margin-right: -3px;
+  margin-left: 1px;
+  padding-top: 2px;
+}
+
+.media-item:hover{
+  border-color: var(--pri_alt);
+}
+
+.media-item.active{
+  border-color: var(--pri);
+}
+
+.media-item img{
+  height: 100%;
+  width: 100%;
+}
+
+.date{
+  margin-bottom: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.desc{
+  margin-top: 10px;
+  font-size: 16px;
 }
