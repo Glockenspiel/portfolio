@@ -18,7 +18,7 @@ window.onload = function(){
   genProfile();
   genNav();
 
-  //add container
+  //add content container
   bwe.append("body", {
     tag : "div",
     class : "container"
@@ -27,7 +27,7 @@ window.onload = function(){
   //loads the catagory depending on the url hash
   changePage(getPageID());
 
-  //sets the offset for scrolling
+  //sets the starting offset for scrolling
   offsetTop  = $(".nav-con").offset().top;
 }
 
@@ -50,7 +50,7 @@ function getPageID(){
 //changing page event
 $(document).on("click", ".change-page", function(){
   var sel = this;
-  $("html, body").animate({ scrollTop: 0 }, 'fast', function(){
+  $("html, body").animate({ scrollTop: offsetTop }, 'fast', function(){
     changePage($(sel).attr("id").replace("cat-", ""));
   });
 });
@@ -161,7 +161,7 @@ function genProfile(){
   bwe.append("body", about);
 }
 
-//switches the page
+//switches the page and generates the new project items
 function changePage(id){
   if($("#cat-"+id).hasClass('active') == false){
     $(".change-page.active").removeClass('active');
@@ -172,18 +172,12 @@ function changePage(id){
       if(pageData[p]["type"] === id){
         var data = pageData[p];
 
-        var media = {
-          tag : "div",
-          class : "item-media row",
-          children : genMedia(data)
-        }
-
         var item =
          {
           tag : "div",
           class : "item",
           children : [
-            media,
+            genMedia(data),
             genInfo(data)
           ]
         }
@@ -193,6 +187,7 @@ function changePage(id){
   }
 }
 
+//generates the json for the info of a project item
 function genInfo(data){
   var info =
   {
@@ -238,7 +233,7 @@ function genInfo(data){
   return info;
 }
 
-//generates the media for an item
+//generates the json for the media of an item
 function genMedia(data){
   var media = [];
   var list = [];
@@ -285,7 +280,11 @@ function genMedia(data){
     class : "media-list",
     children : list
   });
-  return media;
+  return {
+    tag : "div",
+    class : "item-media row",
+    children : media
+  };
 }
 
 //generates the json for the media list items
@@ -353,7 +352,11 @@ function changePreview(sel, parent, media, type){
   }
 }
 
-//data for the page
+/*
+  json data for the page
+  which is being parsed and build with bwe
+  bwe is a JavaScript library I made which extends jQuery
+*/
 var pageData = [
   {
     type : "game",
@@ -362,11 +365,7 @@ var pageData = [
     date : "Nov 2017",
     videoID : "6dPV2LQNfWI",
     imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg"],
-    desc : ["3 day game jam", "C# Unity", "Arcade style car physics", "AI"],
-    more : {
-      text : "",
-      img : ""
-    }
+    desc : ["3 day game jam", "C# Unity", "Arcade style car physics", "AI"]
   },
   {
     type : "game",
@@ -375,11 +374,7 @@ var pageData = [
     date : "Oct 2016",
     videoID : "iVH01jBOEB0",
     imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg", "screen_4.jpg"],
-    desc : ["Dota 2 Tools", "Lua", "Multiplayer PvP", "Paricle effects", "Custom map"],
-    more : {
-      text : "",
-      img : ""
-    }
+    desc : ["Dota 2 Tools", "Lua", "Multiplayer PvP", "Paricle effects", "Custom map"]
   },
   {
     type : "game",
@@ -388,11 +383,7 @@ var pageData = [
     date : "Mar 2016",
     videoID : "aLekW5fLcHY",
     imgs  : ["screen_1.jpg", "screen_3.jpg"],
-    desc : ["Unity C#", "Randomly generated maps", "Use of coroutines", "7 day game jam"],
-    more : {
-      text : "",
-      img : ""
-    }
+    desc : ["Unity C#", "Randomly generated maps", "Use of coroutines", "7 day game jam"]
   },
   {
     type : "game",
@@ -416,11 +407,7 @@ var pageData = [
         con : "GitHub",
         href : "https://github.com/pohka/Java-Game-Engine"
       },
-    ],
-    more : {
-      text : "",
-      img : ""
-    }
+    ]
   },
   {
     type : "soft",
@@ -449,11 +436,7 @@ var pageData = [
         con : "GitHub",
         href : "https://github.com/pohka/CoolDownFeed"
       }
-    ],
-    more : {
-      text : "",
-      img : ""
-    }
+    ]
   },
   {
     type :  "soft",
@@ -478,11 +461,7 @@ var pageData = [
         con : "GitHub",
         href : "https://github.com/pohka/Fibers4U"
       }
-    ],
-    more : {
-      text : "",
-      img : ""
-    }
+    ]
   },
   {
     type :  "edu",
@@ -501,11 +480,7 @@ var pageData = [
       "Software Testing",
       "Android Development",
       "Artificial Intelligence and Machine Learning"
-    ],
-    more : {
-      text : "",
-      img : ""
-    }
+    ]
   },
   {
     type : "contact",
@@ -514,12 +489,9 @@ var pageData = [
     date : "",
     videoID : "",
     imgs  : ["img.jpg"],
-    desc : ["geffbourke123@gmail.com"],
-    more : {
-      text : "",
-      img : ""
-    }
+    desc : ["geffbourke123@gmail.com"]
   },
+  /*json template*/
   {
     type : "",
     id : "",
@@ -528,10 +500,6 @@ var pageData = [
     videoID : "",
     imgs  : [],
     desc : [],
-    links : [],
-    more : {
-      text : "",
-      img : ""
-    }
+    links : []
   },
 ];
