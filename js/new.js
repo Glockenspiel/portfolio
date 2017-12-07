@@ -1,3 +1,5 @@
+var offsetTop;
+
 window.onload = function(){
   genProfile();
   genNav();
@@ -10,6 +12,9 @@ window.onload = function(){
 
   //loads the catagory depending on the url hash
   changePage(getPageID());
+
+  //sets the offset for scrolling
+  offsetTop  = $(".nav-con").offset().top;
 }
 
 //returns the id of the current hash catagory
@@ -27,13 +32,21 @@ function getPageID(){
 
 //changing page event
 $(document).on("click", ".catagory", function(){
-  changePage($(this).attr("id").replace("cat-", ""));
+  var sel = this;
+  $("html, body").animate({ scrollTop: 0 }, 'fast', function(){
+    changePage($(sel).attr("id").replace("cat-", ""));
+  });
 });
 
 //media list item click event
 $(document).on("click", ".media-item", function(){
   changePreview(this, $(this).data("parent"), $(this).data("media"), $(this).data("type"))
 })
+
+$(document).scroll(function() {
+     $(".nav-con").toggleClass('fixed-nav', $(window).scrollTop() > offsetTop);
+ });
+
 
 var pages = [
   {
@@ -61,14 +74,22 @@ function genNav(){
     bwe.appendAttr(items, "children", {
       tag : "a",
       id : "cat-"+pages[i]["page"].replace("#", ""),
-      class : "catagory " + getActiveNav(pages[i]["page"]),
+      class : "catagory",
       con : pages[i]["name"],
       href : pages[i]["page"]
     });
   }
   bwe.append("body",{
     tag : "nav",
-    children : [items]
+    children : [
+      {
+        tag : "div",
+        class : "nav-con",
+        children : [
+          items
+        ]
+      }
+    ]
   });
 }
 
@@ -113,27 +134,17 @@ function genProfile(){
   bwe.append("body", about);
 }
 
-//returns the string of active for building json on load
-function getActiveNav(page){
-  var curPage = window.location.href.split("/").pop();
-  if(curPage === page || (page==="#game" && curPage=="")){
-    return " active";
-  }
-  return "";
-}
-
 //switches the page
 function changePage(id){
   if($("#cat-"+id).hasClass('active') == false){
     $(".catagory.active").removeClass('active');
     $("#cat-"+id).addClass('active');
-  }
+
 
   $(".container").html("");
   for(var p in pageData){
     if(pageData[p]["type"] === id){
       var data = pageData[p];
-
 
       var media = {
         tag : "div",
@@ -175,6 +186,7 @@ function changePage(id){
 
       bwe.append(".container", item);
     }
+  }
   }
 }
 

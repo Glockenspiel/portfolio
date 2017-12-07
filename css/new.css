@@ -1,13 +1,11 @@
 :root{
   --bg : #fafafa;
-  --page_bg : #fff;
-  --hover : #aaa;
+  --hover : #cfcfcf;
   --text : #000;
-  --pri : #7cccff;
-  --border : #ccc;
-  --bg_alt : #eee;
-  --pri_alt : #0375be;
-  --shadow : #aaa;
+  --pri : #378baf;
+  --sec : #15bc97;
+  --bg_alt : #dae4e8;
+  --shadow : #000;
 }
 
 html{
@@ -16,12 +14,21 @@ html{
   font-size: 16px;
 }
 
+body{
+  background-image: url("/res/img/bg2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 nav{
   height: 50px;
   width: 1070px;
   margin: 0 auto;
   margin-top:10px;
-  background: var(--page_bg);
   border-bottom: 1px solid var(--pri);
 }
 
@@ -31,10 +38,31 @@ iframe{
   border: none;
 }
 
-
-.nav-items a:hover{
-  background: var(--hover);
+.fixed-nav{
+  position: fixed;
+  top: 0;
 }
+
+.nav-con{
+  background: var(--bg);
+  width: 1070px;
+  box-shadow: 0px 3px 12px var(--shadow);
+}
+
+.nav-con::after{
+  content : "";
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--pri); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, var(--pri) , var(--sec)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, var(--pri), var(--sec)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, var(--pri), var(--sec)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, var(--pri) , var(--sec)); /* Standard syntax */
+}
+
+
+
 .nav-items a{
   display: inline-block;
   margin-right: -4px;
@@ -47,8 +75,10 @@ iframe{
   background: var(--bg);
 }
 
-.nav-items a.active{
+.nav-items a.active, .nav-items a:hover
+{
   background: var(--pri);
+  color: var(--bg);
 }
 
 a{
@@ -58,7 +88,7 @@ a{
 .profile{
   height: 220px;
   width: 1070px;
-  margin: 30px auto;
+  margin: 50px auto;
   margin-bottom: 60px;
 }
 
@@ -76,10 +106,12 @@ h1{
   padding-left: 70px;
   padding-top: 15px;
   height: 100%;
+  color: var(--bg);
 }
 
 .profile-info table{
   margin-left: 20px;
+  color: var(--bg);
 }
 
 .profile-info td{
@@ -98,14 +130,14 @@ h1{
   min-height: 500px;
   padding: 0;
   margin-bottom: 400px;
+  margin-top: 30px;
 }
 
 .item{
   margin: 8px 0px;
   width: 100%;
-  height: 473px;
+  height: 475px;
   background :  var(--bg);
-  box-shadow: 0px 0px 12px var(--shadow);
 }
 
 .item-media{
@@ -120,14 +152,13 @@ h1{
 }
 
 .item-info{
-  width: 324px;
+  width: 328px;
   height: 100%;
   display: inline-block;
   text-align: center;
   padding: 0px 20px;
   clear: left;
   border-left: 4px solid var(--border);
-  border-right: 4px solid var(--border);
 }
 
 .item-info ul{
@@ -144,27 +175,25 @@ h1{
 }
 
 .media-list{
-  height: 83px;
+  height: 85px;
   width: 700px;
   background: var(--bg_alt);
+  padding-left: 1px;
 }
 
 .media-item{
   height: 78px;
-  width: 139px;
+  width: 136px;
   border-bottom: 3px solid var(--border);
   cursor: pointer;
-  margin-right: -3px;
-  margin-left: 1px;
+  margin-right: -2px;
+  margin-left: 2px;
   padding-top: 2px;
+  box-shadow: 0px 0px 2px var(--shadow);
 }
 
-.media-item:hover{
-  border-color: var(--pri_alt);
-}
-
-.media-item.active{
-  border-color: var(--pri);
+.media-item:hover, .media-item.active{
+  border-color: var(--sec);
 }
 
 .media-item img{
