@@ -1,4 +1,18 @@
 var offsetTop;
+bwe.pages = [
+  {
+    name : "Games",
+    page : "#game"
+  },
+  {
+    name : "Software",
+    page : "#soft"
+  },
+  {
+    name : "Education",
+    page : "#edu"
+  }
+];
 
 window.onload = function(){
   genProfile();
@@ -21,17 +35,20 @@ window.onload = function(){
 function getPageID(){
   var id = "game";
   var curPage = window.location.href.split("/").pop();
-  for(var i in pages){
-    if(curPage === pages[i]["page"]){
+  for(var i in bwe.pages){
+    if(curPage === bwe.pages[i]["page"]){
       id = curPage.replace("#", "");
       break;
     }
+  }
+  if(curPage === "#contact"){
+    id = "contact";
   }
   return id;
 }
 
 //changing page event
-$(document).on("click", ".catagory", function(){
+$(document).on("click", ".change-page", function(){
   var sel = this;
   $("html, body").animate({ scrollTop: 0 }, 'fast', function(){
     changePage($(sel).attr("id").replace("cat-", ""));
@@ -43,25 +60,10 @@ $(document).on("click", ".media-item", function(){
   changePreview(this, $(this).data("parent"), $(this).data("media"), $(this).data("type"))
 })
 
+//fixes the navbar to the top when you scroll past it
 $(document).scroll(function() {
      $(".nav-con").toggleClass('fixed-nav', $(window).scrollTop() > offsetTop);
  });
-
-
-var pages = [
-  {
-    name : "Games",
-    page : "#game"
-  },
-  {
-    name : "Software",
-    page : "#soft"
-  },
-  {
-    name : "Education",
-    page : "#edu"
-  }
-];
 
 //generates the navbar html
 function genNav(){
@@ -70,13 +72,13 @@ function genNav(){
     class : "nav-items"
   };
 
-  for(var i in pages){
+  for(var i in bwe.pages){
     bwe.appendAttr(items, "children", {
       tag : "a",
-      id : "cat-"+pages[i]["page"].replace("#", ""),
-      class : "catagory",
-      con : pages[i]["name"],
-      href : pages[i]["page"]
+      id : "cat-"+bwe.pages[i]["page"].replace("#", ""),
+      class : "catagory change-page",
+      con : bwe.pages[i]["name"],
+      href : bwe.pages[i]["page"]
     });
   }
   bwe.append("body",{
@@ -93,7 +95,8 @@ function genNav(){
             children : [
               {
                 tag : "a",
-                class : "fa fa-envelope-o",
+                class : "fa fa-envelope-o change-page",
+                id : "cat-contact",
                 href : "#contact"
               },
               {
@@ -125,7 +128,7 @@ function genProfile(){
     children : [
       {
         tag : "div",
-        class : "profile-img",
+        class : "profile-img row",
         children : [
           {
             tag : "img",
@@ -135,7 +138,7 @@ function genProfile(){
       },
       {
         tag : "div",
-        class : "profile-info",
+        class : "profile-info row",
         children : [
           {
             tag : "h1",
@@ -161,57 +164,78 @@ function genProfile(){
 //switches the page
 function changePage(id){
   if($("#cat-"+id).hasClass('active') == false){
-    $(".catagory.active").removeClass('active');
+    $(".change-page.active").removeClass('active');
     $("#cat-"+id).addClass('active');
 
+    $(".container").html("");
+    for(var p in pageData){
+      if(pageData[p]["type"] === id){
+        var data = pageData[p];
 
-  $(".container").html("");
-  for(var p in pageData){
-    if(pageData[p]["type"] === id){
-      var data = pageData[p];
+        var media = {
+          tag : "div",
+          class : "item-media row",
+          children : genMedia(data)
+        }
 
-      var media = {
-        tag : "div",
-        class : "item-media row",
-        children : genMedia(data)
+        var item =
+         {
+          tag : "div",
+          class : "item",
+          children : [
+            media,
+            genInfo(data)
+          ]
+        }
+        bwe.append(".container", item);
       }
-
-      var item =
-       {
-        tag : "div",
-        class : "item",
-        children : [
-          media,
-          {
-            tag : "div",
-            class : "item-info row",
-            id : "info-" + data["id"],
-            children : [
-              {
-                tag : "h2",
-                con : data["title"]
-              },
-              {
-                tag : "div",
-                class : "date",
-                con : data["date"]
-              },
-              {
-                tag : "div",
-                class : "desc",
-                children : [
-                  bwe.genList({}, data["desc"])
-                ]
-              }
-            ]
-          }
-        ]
-      }
-
-      bwe.append(".container", item);
     }
   }
+}
+
+function genInfo(data){
+  var info =
+  {
+    tag : "div",
+    class : "item-info row",
+    id : "info-" + data["id"],
+    children : [
+      {
+        tag : "h2",
+        con : data["title"]
+      },
+      {
+        tag : "div",
+        class : "date",
+        con : data["date"]
+      },
+      {
+        tag : "div",
+        class : "desc",
+        children : [
+          bwe.genList({}, data["desc"])
+        ]
+      }
+    ]
   }
+  if(data["links"] != undefined && data["links"].length > 0){
+    var links = {
+      tag : "div",
+      class : "item-buttons"
+    }
+    for(var i in data["links"]){
+    bwe.appendAttr(links, "children",
+      {
+        tag : "a",
+        href : data["links"][i]["href"],
+        target : "_blank",
+        con : data["links"][i]["con"]
+      });
+    }
+    bwe.appendAttr(info, "children", links);
+  }
+
+  return info;
 }
 
 //generates the media for an item
@@ -336,7 +360,6 @@ var pageData = [
     id : "rapidless",
     title : "Rapidless",
     date : "Nov 2017",
-    link : "",
     videoID : "6dPV2LQNfWI",
     imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg"],
     desc : ["3 day game jam", "C# Unity", "Arcade style car physics", "AI"],
@@ -350,7 +373,6 @@ var pageData = [
     id : "phantom",
     title : "Phantom Palace",
     date : "Oct 2016",
-    link : "",
     videoID : "iVH01jBOEB0",
     imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg", "screen_4.jpg"],
     desc : ["Dota 2 Tools", "Lua", "Multiplayer PvP", "Paricle effects", "Custom map"],
@@ -364,7 +386,6 @@ var pageData = [
     id : "mjj",
     title : "Mythical Jetpack Journey",
     date : "Mar 2016",
-    link : "",
     videoID : "aLekW5fLcHY",
     imgs  : ["screen_1.jpg", "screen_3.jpg"],
     desc : ["Unity C#", "Randomly generated maps", "Use of coroutines", "7 day game jam"],
@@ -378,7 +399,6 @@ var pageData = [
     id : "java-game",
     title : "Java Game Engine",
     date : "Dec 2015",
-    link : "",
     videoID : "",
     imgs  : ["screen_1.jpg"],
     desc : [
@@ -391,6 +411,12 @@ var pageData = [
       "Tile Maps",
       "Saving and Loading"
     ],
+    links : [
+      {
+        con : "GitHub",
+        href : "https://github.com/pohka/Java-Game-Engine"
+      },
+    ],
     more : {
       text : "",
       img : ""
@@ -401,7 +427,6 @@ var pageData = [
     id : "cdf",
     title : "CoolDownFeed.com",
     date : "Oct 2017 - Present",
-    link : "http://www.cooldownfeed.com",
     videoID : "yICAr1zacbk",
     imgs  : ["screen_0.jpg", "screen_1.jpg", "screen_2.jpg", "screen_3.jpg"],
     desc :
@@ -415,17 +440,26 @@ var pageData = [
       "Table generation from csv strings",
       "Comment section with Disqus"
     ],
+    links : [
+      {
+        con : "View",
+        href : "http://www.cooldownfeed.com"
+      },
+      {
+        con : "GitHub",
+        href : "https://github.com/pohka/CoolDownFeed"
+      }
+    ],
     more : {
       text : "",
       img : ""
     }
   },
   {
-    type : "soft",
-    id : "fiber",
+    type :  "soft",
+    id :    "fiber",
     title : "Fiber Library",
-    date : "Apr 2016",
-    link : "",
+    date :  "Apr 2016",
     videoID : "",
     imgs  : [
       "screen_1.jpg",
@@ -439,17 +473,22 @@ var pageData = [
       "Concurrent atomic data structures",
       "Multi-threading"
     ],
+    links : [
+      {
+        con : "GitHub",
+        href : "https://github.com/pohka/Fibers4U"
+      }
+    ],
     more : {
       text : "",
       img : ""
     }
   },
   {
-    type : "edu",
-    id : "uni",
+    type :  "edu",
+    id :    "uni",
     title : "B.Sc in Computer Games Development",
-    date : "Sep 2012 - Aug 2016",
-    link : "",
+    date :  "Sep 2012 - Aug 2016",
     videoID : "",
     imgs  : ["screen_1.jpg"],
     desc : [
@@ -469,14 +508,27 @@ var pageData = [
     }
   },
   {
+    type : "contact",
+    id : "contact",
+    title : "Contact Email",
+    date : "",
+    videoID : "",
+    imgs  : ["img.jpg"],
+    desc : ["geffbourke123@gmail.com"],
+    more : {
+      text : "",
+      img : ""
+    }
+  },
+  {
     type : "",
     id : "",
     title : "",
     date : "",
-    link : "",
     videoID : "",
     imgs  : [],
     desc : [],
+    links : [],
     more : {
       text : "",
       img : ""
