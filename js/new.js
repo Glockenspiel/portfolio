@@ -112,7 +112,7 @@ function genNav(){
               },
               {
                 tag : "a",
-                class : "fa fa-linkedin-square",
+                class : "fa fa-linkedin",
                 href : "https://www.linkedin.com/in/geff-bourke-91b238115/",
                 target : "_blank"
               }
@@ -379,9 +379,31 @@ function changePreview(sel, parent, media, type){
 var pageData = [
   {
     type : "game",
+    id : "payload",
+    title : "Payload on Winters Lane",
+    date : "Nov 2017",
+    videoID : "FztJDS6z_Wg",
+    imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg", "screen_4.jpg"],
+    desc : [
+      "Payload PvP",
+      "Lua Dota 2 modding tools"
+    ],
+    links : [
+      {
+        href : "http://steamcommunity.com/sharedfiles/filedetails/?id=1201546443",
+        con : "View"
+      },
+      {
+        href : "https://github.com/pohka/Payload-Dota/tree/master/scripts/vscripts",
+        con : "GitHub"
+      }
+    ]
+  },
+  {
+    type : "game",
     id : "rapidless",
     title : "Rapidless",
-    date : "Nov 2017",
+    date : "Jul 2017",
     videoID : "6dPV2LQNfWI",
     imgs  : ["screen_1.jpg", "screen_2.jpg", "screen_3.jpg"],
     desc : ["3 day game jam", "C# Unity", "Arcade style car physics", "AI"]
