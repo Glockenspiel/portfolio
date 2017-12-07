@@ -86,9 +86,33 @@ function genNav(){
         tag : "div",
         class : "nav-con",
         children : [
-          items
+          items,
+          {
+            tag : "div",
+            class : "nav-social",
+            children : [
+              {
+                tag : "a",
+                class : "fa fa-envelope-o",
+                href : "#contact"
+              },
+              {
+                tag : "a",
+                class : "fa fa-github",
+                href : "https://github.com/pohka",
+                target : "_blank"
+              },
+              {
+                tag : "a",
+                class : "fa fa-linkedin-square",
+                href : "https://www.linkedin.com/in/geff-bourke-91b238115/",
+                target : "_blank"
+              }
+            ]
+          }
         ]
-      }
+      },
+
     ]
   });
 }

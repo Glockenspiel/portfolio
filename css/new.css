@@ -61,7 +61,9 @@ iframe{
   background: linear-gradient(to right, var(--pri) , var(--sec)); /* Standard syntax */
 }
 
-
+.nav-items{
+  display: inline-block;
+}
 
 .nav-items a{
   display: inline-block;
@@ -72,17 +74,39 @@ iframe{
   text-align: center;
   line-height: 50px;
   font-size: 18px;
-  background: var(--bg);
+
 }
 
-.nav-items a.active, .nav-items a:hover
+.nav-items a, .nav-social a{
+  background: var(--bg_alt);
+  color: var(--text);
+}
+
+.nav-items a.active, .nav-items a:hover,
+.nav-social a:hover, .nav-social a.active
 {
   background: var(--pri);
   color: var(--bg);
 }
 
+.nav-social{
+  display: inline-block;
+  float: right;
+}
+
+.nav-social a{
+  display: inline-block;
+  line-height: 50px;
+  width: 65px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin-left: -3px;
+  margin-right: -1px;
+}
+
 a{
-  color: var(--text);
+  color: var(--bg);
 }
 
 .profile{
@@ -136,7 +160,7 @@ h1{
 .item{
   margin: 8px 0px;
   width: 100%;
-  height: 475px;
+  height: 480px;
   background :  var(--bg);
 }
 
@@ -163,6 +187,7 @@ h1{
 
 .item-info ul{
   text-align: left;
+  line-height: 20px;
 }
 
 .item-preview{
@@ -175,7 +200,7 @@ h1{
 }
 
 .media-list{
-  height: 85px;
+  height: 90px;
   width: 700px;
   background: var(--bg_alt);
   padding-left: 1px;
@@ -184,16 +209,17 @@ h1{
 .media-item{
   height: 78px;
   width: 136px;
-  border-bottom: 3px solid var(--border);
+  padding-bottom: 3px
   cursor: pointer;
   margin-right: -2px;
   margin-left: 2px;
-  padding-top: 2px;
-  box-shadow: 0px 0px 2px var(--shadow);
+  margin-top: 4px;
+  box-shadow: 0px 0px 8px var(--shadow);
 }
 
 .media-item:hover, .media-item.active{
-  border-color: var(--sec);
+  padding-bottom: 0px;
+  border-bottom: 3px solid var(--sec);
 }
 
 .media-item img{
