@@ -1,3 +1,6 @@
+/*
+  Author: Geff Bourke
+*/
 var offsetTop;
 bwe.pages = [
   {
@@ -23,6 +26,8 @@ window.onload = function(){
     tag : "div",
     class : "container"
   });
+
+  genFooter();
 
   //loads the catagory depending on the url hash
   changePage(getPageID());
@@ -116,6 +121,20 @@ function genNav(){
         ]
       },
 
+    ]
+  });
+}
+
+function genFooter(){
+  bwe.append("html", {
+    tag : "footer",
+    children : [
+      {
+        tag : "a",
+        href : "https://github.com/pohka/portfolio",
+        target : "_blank",
+        con : "<span class='footer-icon fa fa-github'></span><br>View the source code of this website on GitHub"
+      }
     ]
   });
 }

@@ -1,3 +1,7 @@
+/*
+  Author: Geff Bourke
+*/
+
 :root{
   --bg : #fafafa;
   --hover : #cfcfcf;
@@ -47,6 +51,7 @@ h1{
 a{
   background: var(--bg_alt);
   color: var(--text);
+  text-decoration: none;
 }
 
 a:hover, a.active{
@@ -103,7 +108,6 @@ a:hover, a.active{
   margin-right: -4px;
   width: 140px;
   height: 50px;
-  text-decoration: none;
   text-align: center;
   line-height: 50px;
   font-size: 18px;
@@ -121,7 +125,6 @@ a:hover, a.active{
   line-height: 50px;
   width: 65px;
   text-align: center;
-  text-decoration: none;
   font-size: 18px;
   margin-left: -3px;
   margin-right: -1px;
@@ -167,7 +170,7 @@ a:hover, a.active{
   width: 1070px;
   min-height: 500px;
   padding: 0;
-  margin-bottom: 400px;
+  margin-bottom: 100px;
   margin-top: 30px;
 }
 
@@ -265,7 +268,6 @@ a:hover, a.active{
   display: inline-block;
   height: 40px;
   color: var(--text);
-  text-decoration: none;
   line-height: 40px;
   width: 80px;
   background: var(--bg_alt);
@@ -274,4 +276,28 @@ a:hover, a.active{
 .item-buttons a:hover{
   background: var(--pri);
   color: var(--bg);
+}
+
+/*
+ ----------- Footer -----------
+*/
+footer{
+  width: 1070px;
+  margin: 0 auto;
+
+  margin-bottom: 100px;
+}
+
+footer a{
+  display: block;
+  width: 200px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 25px 40px;
+  box-shadow: 0px 0px 10px var(--shadow);
+}
+
+.footer-icon{
+  font-size: 50px;
 }
